@@ -13,8 +13,33 @@ public class Main {
     public static List<MigratoryData> migratoryDataList = new ArrayList<>();
 
     public static void main(String[] args) {
+        Beneficiary beneficiary = new Beneficiary("Tales","Victorini","Angolana","Celestino",
+                            "Angolana","Angelina","Angola","28/02/2001","Luanda",
+                "Cazenga","Tala","Hady","Luanda",1,"Casado",2323232,3232323,"Luanda",
+                "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
+                "LV","NY City");
+        Professional professional = new Professional("SC","Scofield","Developer",2323,"fab@gmail.com","luanda-add");
+        ResponsibleEntity responsible = new ResponsibleEntity("Fabio","0332KS32","20/02/2025",32,"Cazenga","Tala",
+                "Hady","Cazenga","Cazenga","Angola");
+        MigratoryData migratoryData = new MigratoryData("02/09/2021","Aeroporto","Estudo",32323,23,"Estudo");
+        SME sme = new SME(12,"20/20/2021","Cazenga","Bento");
+       Entity entity = new Entity(1,beneficiary,professional,responsible,migratoryData,sme);
+       entityList.add(entity);
 
-       menu();
+       beneficiary = new Beneficiary("Ataide","Victorino","Angolana","Celestino",
+                "Angolana","Angelina","Angola","28/02/2001","Luanda",
+                "Cazenga","Tala","Hady","Luanda",1,"Solteiro",323222,3232323,"Luanda",
+                "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
+                "LV","NY City");
+        professional = new Professional("Engineer","L&L","Programming",2323,"Ataid@gmail.com","luanda-add");
+        responsible = new ResponsibleEntity("Artencio","0332KS32","20/02/2025",32,"Cazenga","Tala",
+                "Hady","Cazenga","Cazenga","Angola");
+        migratoryData = new MigratoryData("02/09/2021","Vila","Saude",32323,23,"Saude");
+        entity = new Entity(3,beneficiary,professional,responsible,migratoryData,sme);
+
+        entityList.add(entity);
+
+        menu();
 
     }
     //   *************** THE BEGINNING OF ALL
@@ -55,7 +80,6 @@ public class Main {
         password = in.nextInt();
 
         if (loginSME.containsKey(password) && loginSME.get(password).equals(userName)){
-
             SME smeUser = insertionSME();
             insertionEntity(objectiveOfVisa,beneficiaryList,profissionalList,responsibleEntityList,migratoryDataList,smeUser);
             objectiveOfVisa = null;
@@ -63,11 +87,6 @@ public class Main {
         }else{
             System.out.println("Usuario ou senha incorreta");
         }
-
-
-
-
-
     }
     public static void menuEntity() {
         int option;
@@ -113,6 +132,7 @@ public class Main {
 
         System.out.println("Numero do BI: ");
             bi = in.nextInt();
+        in.nextLine();
         System.out.println("Nacionalidade: ");
             nationality = in.nextLine();
 
@@ -176,7 +196,9 @@ public class Main {
 
 
     public static void showAll(int indexOf) {
+        System.out.println("MOSTRANDO TODOS OS CAMPOS");
 
+            entityList.get(indexOf).showEntity();
     }
 
     public static void showWhatToDo() {

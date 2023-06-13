@@ -114,7 +114,7 @@ public class Beneficiary {
         switch (option){
             case 1: setName((String) newValue);break;
             case 2:  setNickname((String) newValue);
-                break;
+                 break;
             case 3: setNationality((String) newValue);
                 break;
             case 4: setFatherName((String) newValue);
@@ -392,26 +392,26 @@ public class Beneficiary {
 
     @Override
     public String toString() {
-        return "Beneficiary{" +
-                "name='" + name + '\'' +
-                ", Nickname='" + Nickname + '\'' +
-                ", Nationality='" + Nationality + '\'' +
-                ", fatherName='" + fatherName + '\'' +
-                ", fatherNationality='" + fatherNationality + '\'' +
-                ", motherName='" + motherName + '\'' +
-                ", motherNationality='" + motherNationality + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", local='" + local + '\'' +
-                ", street='" + street + '\'' +
-                ", comuna='" + comuna + '\'' +
-                ", municipio='" + municipio + '\'' +
-                ", province='" + province + '\'' +
-                ", Gender=" + Gender +
-                ", civilState='" + civilState + '\'' +
-                ", documentationNumber=" + documentationNumber +
-                ", passportNumber=" + passportNumber +
-                ", localOfEmissionPassport='" + localOfEmissionPassport + '\'' +
-                ", dataOfEmissionPassport='" + dataOfEmissionPassport + '\'' +
+        return
+                "Nome='" + name + '\'' +
+                "\n Nome do Meio='" + Nickname + '\'' +
+                "\n Nacionalidade ='" + Nationality + '\'' +
+                "\n fatherName='" + fatherName + '\'' +
+                "\n fatherNationality='" + fatherNationality + '\'' +
+                "\n motherName='" + motherName + '\'' +
+                "\n motherNationality='" + motherNationality + '\'' +
+                "\n dateOfBirth='" + dateOfBirth + '\'' +
+                "\n local='" + local + '\'' +
+                "\n street='" + street + '\'' +
+                "\n comuna='" + comuna + '\'' +
+                "\n municipio='" + municipio + '\'' +
+                "\n province='" + province + '\'' +
+                "\n Gender=" + Gender +
+                "\n civilState='" + civilState + '\'' +
+                "\n documentationNumber=" + documentationNumber +
+                "\n passportNumber=" + passportNumber +
+                "\n localOfEmissionPassport='" + localOfEmissionPassport + '\'' +
+                "\n dataOfEmissionPassport='" + dataOfEmissionPassport + '\'' +
                 ", validate=" + validate +
                 ", telephoneNumber=" + telephoneNumber +
                 ", e_mail='" + e_mail + '\'' +
@@ -420,7 +420,6 @@ public class Beneficiary {
                 ", bairroToBe='" + bairroToBe + '\'' +
                 ", comunaToBe='" + comunaToBe + '\'' +
                 ", MunicipioToBe='" + MunicipioToBe + '\'' +
-                ", provinceToBe='" + provinceToBe + '\'' +
-                '}';
+                ", provinceToBe='" + provinceToBe + '\'';
     }
 }
