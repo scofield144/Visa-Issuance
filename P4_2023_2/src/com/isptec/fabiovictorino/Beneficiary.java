@@ -23,7 +23,7 @@ public class Beneficiary {
     public Integer passportNumber;
     public String localOfEmissionPassport;
     public String dataOfEmissionPassport;
-    public Integer validate;
+    public String validate;
     public Integer telephoneNumber;
     public String e_mail;
 
@@ -38,7 +38,7 @@ public class Beneficiary {
                        String dateOfBirth, String local, String street,
                        String comuna, String municipio, String province, Integer gender, String civilState,
                        String documentationNumber, Integer passportNumber, String localOfEmissionPassport,
-                       String dataOfEmissionPassport, Integer validate, Integer telephoneNumber, String e_mail,
+                       String dataOfEmissionPassport, String validate, Integer telephoneNumber, String e_mail,
                        Integer houseNumberToBe, String streetToBe, String bairroToBe, String comunaToBe,
                        String municipioToBe, String provinceToBe) {
         this.name = name;
@@ -124,6 +124,34 @@ public class Beneficiary {
             case 5: setFatherNationality((String) newValue);break;
             case 6: setMotherName((String) newValue); break;
             case 7: setMotherNationality((String) newValue);break;
+            case 8: setDateOfBirth((String) newValue);break;
+            case 9:  setLocal((String) newValue);
+                break;
+            case 10: setComuna((String) newValue);
+                break;
+            case 11: setProvince((String) newValue);
+                break;
+            case 12: setGender((Integer) newValue);break;
+            case 13: setCivilState((String) newValue); break;
+            case 14: setDocumentationNumber((String) newValue);break;
+            case 15:setPassportNumber((Integer) newValue);break;
+            case 16:  setLocalOfEmissionPassport((String) newValue);break;
+            case 17: setDataOfEmissionPassport((String) newValue);
+                break;
+            case 18: setValidate((String) newValue);
+                break;
+            case 19: setTelephoneNumber((Integer) newValue);break;
+            case 20: setE_mail((String) newValue); break;
+            case 21: setHouseNumberToBe((Integer) newValue);break;
+            case 22:setStreetToBe((String) newValue); break;
+            case 23:  setBairroToBe((String) newValue);
+                break;
+            case 24: setComunaToBe((String) newValue);
+                break;
+            case 25: setMunicipioToBe((String) newValue);
+                break;
+            case 26: setProvinceToBe((String) newValue);break;
+
             default: break;
         }
     }
@@ -239,7 +267,7 @@ public class Beneficiary {
         this.dataOfEmissionPassport = dataOfEmissionPassport;
     }
 
-    public void setValidate(Integer validate) {
+    public void setValidate(String validate) {
         this.validate = validate;
     }
 
@@ -354,7 +382,7 @@ public class Beneficiary {
         return dataOfEmissionPassport;
     }
 
-    public Integer getValidate() {
+    public String getValidate() {
         return validate;
     }
 
@@ -395,19 +423,19 @@ public class Beneficiary {
     @Override
     public String toString() {
         return
-                "Nome='" + name + '\'' +
-                "\n Nome do Meio='" + Nickname + '\'' +
-                "\n Nacionalidade ='" + Nationality + '\'' +
-                "\n fatherName='" + fatherName + '\'' +
-                "\n fatherNationality='" + fatherNationality + '\'' +
-                "\n motherName='" + motherName + '\'' +
-                "\n motherNationality='" + motherNationality + '\'' +
-                "\n dateOfBirth='" + dateOfBirth + '\'' +
-                "\n local='" + local + '\'' +
-                "\n street='" + street + '\'' +
-                "\n comuna='" + comuna + '\'' +
-                "\n municipio='" + municipio + '\'' +
-                "\n province='" + province + '\'' +
+                "   Nome: " + name +
+                "\n Nome do Meio: " + Nickname +
+                "\n Nacionalidade: " + Nationality +
+                "\n Nome do pai: " + fatherName +
+                "\n Nacionalidade do pai: " + fatherNationality  +
+                "\n Nome da mãe: " + motherName +
+                "\n Nacionalidade da mãe: " + motherNationality +
+                "\n dateOfBirth: " + dateOfBirth + '\'' +
+                "\n local: " + local + '\'' +
+                "\n street: " + street + '\'' +
+                "\n comuna: " + comuna + '\'' +
+                "\n municipio: " + municipio + '\'' +
+                "\n province: " + province + '\'' +
                 "\n Gender=" + Gender +
                 "\n civilState='" + civilState + '\'' +
                 "\n documentationNumber=" + documentationNumber +

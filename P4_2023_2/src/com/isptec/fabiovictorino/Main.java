@@ -17,7 +17,7 @@ public class Main {
         Beneficiary beneficiary = new Beneficiary("Tales","Victorini","Angolana","Celestino",
                             "Angolana","Angelina","Angola","28/02/2001","Luanda",
                 "Cazenga","Tala","Hady","Luanda",1,"Casado","232la3232",3232323,"Luanda",
-                "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
+                "2/4/2020","04/12/2027",93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
                 "LV","NY City");
         Professional professional = new Professional("SC","Scofield","Developer",2323,"fab@gmail.com","luanda-add");
         ResponsibleEntity responsible = new ResponsibleEntity("Fabio","0332KS32","20/02/2025",32,"Cazenga","Tala",
@@ -45,7 +45,7 @@ public class Main {
        beneficiary = new Beneficiary("Ataide","Victorino","Angolana","Celestino",
                 "Angolana","Angelina","Angola","28/02/2001","Luanda",
                 "Cazenga","Tala","Hady","Luanda",1,"Solteiro","323bg222",3232323,"Luanda",
-                "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
+                "2/4/2020","14/02/2027",93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
                 "LV","NY City");
         professional = new Professional("Engineer","L&L","Programming",2323,"Ataid@gmail.com","luanda-add");
         responsible = new ResponsibleEntity("Artencio","033232","20/02/2025",32,"Cazenga","Tala",
@@ -449,7 +449,7 @@ public class Main {
         int passportNumber;
         String localOfEmissionPassport;
         String dataOfEmissionPassport; //*******************
-        int validate;
+        String validate;
         int telephoneNumber;
         String e_mail;
 
@@ -486,7 +486,7 @@ public class Main {
         in.nextLine();
         System.out.println("Local de emissão: "); localOfEmissionPassport = in.nextLine();
         System.out.println("Data de emissão: "); dataOfEmissionPassport = in.nextLine();
-        System.out.println("Validade: ");validate = in.nextInt();
+        System.out.println("Validade: ");validate = in.nextLine();;
         System.out.println("Telefone: "); telephoneNumber = in.nextInt();
         in.nextLine();
         System.out.println("E-mail: "); e_mail = in.nextLine();
