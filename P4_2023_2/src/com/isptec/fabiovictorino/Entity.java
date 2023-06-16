@@ -42,7 +42,7 @@ public class Entity {
         }
         return -1;
     }
-    public   int search(List<Entity> entityList, Integer biNumber, String nationality) {
+    public   int search(List<Entity> entityList, String biNumber, String nationality) {
         if (entityList != null) {
             for (Entity entity : entityList) {
                 if (entity.beneficiary.getDocumentationNumber().equals(biNumber)
@@ -58,6 +58,7 @@ public class Entity {
 
         switch (option) {
             case 1:
+
                 if ((Integer) newValue <= 8) {
                     entity.visaPurpose = (Integer) newValue;
                 } else {

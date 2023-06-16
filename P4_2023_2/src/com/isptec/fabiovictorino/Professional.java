@@ -44,10 +44,15 @@ public class Professional {
     }
     public <T> void updateValue(int option,T newValue) {
         switch (option) {
-            case 1 -> setTelephoneNumber((Integer) newValue);
-            case 2 -> setFunction((String) newValue);
-            case 3 -> setAddress((String) newValue);
-            case 4 -> setCompany((String) newValue);
+            case 1 -> {
+                System.out.println("INSIDE DDDD");
+                setProfession((String) newValue);
+            }
+            case 2 ->setCompany((String) newValue);
+            case 3 ->setFunction((String) newValue);
+            case 4 -> setTelephoneNumber((Integer) newValue);
+            case 5 -> setEmail((String) newValue);
+            case 6 -> setAddress((String) newValue);
             default -> {
             }
         }

@@ -19,7 +19,7 @@ public class Beneficiary {
     public String province;
     public Integer Gender;
     public String civilState;
-    public Integer documentationNumber;
+    public String documentationNumber;
     public Integer passportNumber;
     public String localOfEmissionPassport;
     public String dataOfEmissionPassport;
@@ -37,7 +37,7 @@ public class Beneficiary {
     public Beneficiary(String name, String nickname, String nationality, String fatherName, String fatherNationality, String motherName, String motherNationality,
                        String dateOfBirth, String local, String street,
                        String comuna, String municipio, String province, Integer gender, String civilState,
-                       Integer documentationNumber, Integer passportNumber, String localOfEmissionPassport,
+                       String documentationNumber, Integer passportNumber, String localOfEmissionPassport,
                        String dataOfEmissionPassport, Integer validate, Integer telephoneNumber, String e_mail,
                        Integer houseNumberToBe, String streetToBe, String bairroToBe, String comunaToBe,
                        String municipioToBe, String provinceToBe) {
@@ -89,10 +89,10 @@ public class Beneficiary {
             return false;
     }
 
-    private static Beneficiary findPersonList(List<Beneficiary> p, int BI, String country) {
+    private static Beneficiary findPersonList(List<Beneficiary> p, String BI, String country) {
         for (Beneficiary personal: p){
             if (personal.getNationality().equals(country)
-                    &&( personal.getDocumentationNumber() == BI)){
+                    &&( personal.getDocumentationNumber().equals(BI))){
                 return personal;
             }
         }
@@ -100,7 +100,7 @@ public class Beneficiary {
     }
 
 
-    public boolean deletePerson(List<Beneficiary> p, int BI, String country) {
+    public boolean deletePerson(List<Beneficiary> p, String BI, String country) {
         Beneficiary personal = findPersonList(p, BI, country);
         if (personal != null){
            p.remove(personal);
@@ -112,7 +112,9 @@ public class Beneficiary {
 
     public <T> void updateValue(int option,T newValue) {
         switch (option){
-            case 1: setName((String) newValue);break;
+            case 1:
+                System.out.println("INSIDE");
+                setName((String) newValue);break;
             case 2:  setNickname((String) newValue);
                  break;
             case 3: setNationality((String) newValue);
@@ -221,7 +223,7 @@ public class Beneficiary {
         this.civilState = civilState;
     }
 
-    public void setDocumentationNumber(Integer documentationNumber) {
+    public void setDocumentationNumber(String documentationNumber) {
         this.documentationNumber = documentationNumber;
     }
 
@@ -336,7 +338,7 @@ public class Beneficiary {
         return civilState;
     }
 
-    public Integer getDocumentationNumber() {
+    public String getDocumentationNumber() {
         return documentationNumber;
     }
 

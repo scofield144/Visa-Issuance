@@ -1,11 +1,12 @@
 package com.isptec.fabiovictorino;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
     public static List<Entity> entityList = new ArrayList<>();
     public static Scanner in = new Scanner(System.in);
-    public static List<Integer> objectiveOfVisa;
+    public static List<Integer> objectiveOfVisa = new ArrayList<>();
     public static List<Beneficiary> beneficiaryList = new ArrayList<>();
     public static List<Professional> profissionalList = new ArrayList<>();
     public static List<SME> smeList = new ArrayList<>();
@@ -15,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         Beneficiary beneficiary = new Beneficiary("Tales","Victorini","Angolana","Celestino",
                             "Angolana","Angelina","Angola","28/02/2001","Luanda",
-                "Cazenga","Tala","Hady","Luanda",1,"Casado",2323232,3232323,"Luanda",
+                "Cazenga","Tala","Hady","Luanda",1,"Casado","232la3232",3232323,"Luanda",
                 "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
                 "LV","NY City");
         Professional professional = new Professional("SC","Scofield","Developer",2323,"fab@gmail.com","luanda-add");
@@ -23,20 +24,44 @@ public class Main {
                 "Hady","Cazenga","Cazenga","Angola");
         MigratoryData migratoryData = new MigratoryData("02/09/2021","Aeroporto","Estudo",32323,23,"Estudo");
         SME sme = new SME(12,"20/20/2021","Cazenga","Bento");
-       Entity entity = new Entity(1,beneficiary,professional,responsible,migratoryData,sme);
-       entityList.add(entity);
+
+        beneficiaryList.add(beneficiary);
+        profissionalList.add(professional);
+        responsibleEntityList.add(responsible);
+        migratoryDataList.add(migratoryData);
+        smeList.add(sme);
+
+
+
+        Integer integer = 2;
+        objectiveOfVisa.add(integer);
+        integer = 3;
+        objectiveOfVisa.add(integer);
+
+        Entity entity = new Entity(objectiveOfVisa.get(0),beneficiaryList.get(0),profissionalList.get(0),
+                responsibleEntityList.get(0),migratoryDataList.get(0),smeList.get(0));
+        entityList.add(entity);
 
        beneficiary = new Beneficiary("Ataide","Victorino","Angolana","Celestino",
                 "Angolana","Angelina","Angola","28/02/2001","Luanda",
-                "Cazenga","Tala","Hady","Luanda",1,"Solteiro",323222,3232323,"Luanda",
+                "Cazenga","Tala","Hady","Luanda",1,"Solteiro","323bg222",3232323,"Luanda",
                 "2/4/2020",4,93939393,"fabio@gmail.com",23,"NY","Broklin","ST",
                 "LV","NY City");
         professional = new Professional("Engineer","L&L","Programming",2323,"Ataid@gmail.com","luanda-add");
-        responsible = new ResponsibleEntity("Artencio","0332KS32","20/02/2025",32,"Cazenga","Tala",
+        responsible = new ResponsibleEntity("Artencio","033232","20/02/2025",32,"Cazenga","Tala",
                 "Hady","Cazenga","Cazenga","Angola");
         migratoryData = new MigratoryData("02/09/2021","Vila","Saude",32323,23,"Saude");
-        entity = new Entity(3,beneficiary,professional,responsible,migratoryData,sme);
 
+
+        beneficiaryList.add(beneficiary);
+        profissionalList.add(professional);
+        responsibleEntityList.add(responsible);
+        migratoryDataList.add(migratoryData);
+        smeList.add(sme);
+
+
+        entity = new Entity(objectiveOfVisa.get(1),beneficiaryList.get(1),profissionalList.get(1),
+                            responsibleEntityList.get(1),migratoryDataList.get(1),smeList.get(1));
         entityList.add(entity);
 
         menu();
@@ -44,13 +69,34 @@ public class Main {
     }
     //   *************** THE BEGINNING OF ALL
 
-    public static void menu() {
-        int option = 0;
+    // ******************************* EXTRA FUNCTIONS*********************************
+    public static void headFoot() {
         System.out.println("""
-                REPÚBLICA DE ANGOLA
-               MINISTÉRIO DO INTERIOR
-         SERVIÇO DE MIGRAÇÃO E ESTRANGEIROS
-         
+                        REPÚBLICA DE ANGOLA
+                        MINISTÉRIO DO INTERIOR
+                        SERVIÇO DE MIGRAÇÃO E ESTRANGEIROS
+                """);
+    }
+    public static void clearScreen() {
+        //System.out.print("\033c");
+
+            try{
+                ProcessBuilder pb = new ProcessBuilder("bash", "-c", "clear");
+                Map<String, String> env = pb.environment();
+                env.put("TERM", "xterm");
+                pb.inheritIO().start().waitFor();
+            } catch(Exception e) {
+                System.out.println(e);
+            }
+
+
+    }
+//*******************************************************************************
+    public static void menu() {
+        clearScreen();
+        int option = 0;
+        headFoot();
+        System.out.println("""
                 Insere para iniciar:
                 1 - SME
                 2 - BENEFICIARIO
@@ -60,11 +106,14 @@ public class Main {
             loginSME();
         }else {
             menuEntity();
+            loginSME();
         }
-
+        menu();
     }
     public static void loginSME(){
-
+        clearScreen();
+        headFoot();
+        in.nextLine();
         Map<Integer,String> loginSME = new HashMap<>();
             loginSME.put(1122,"Fabio");
             loginSME.put(2212,"Tales");
@@ -76,91 +125,114 @@ public class Main {
         int password;
         System.out.println("User: ");
         userName = in.nextLine();
-        System.out.println("Pass");
+        System.out.println("Pass: ");
         password = in.nextInt();
 
         if (loginSME.containsKey(password) && loginSME.get(password).equals(userName)){
             SME smeUser = insertionSME();
-            insertionEntity(objectiveOfVisa,beneficiaryList,profissionalList,responsibleEntityList,migratoryDataList,smeUser);
+
+            insertionEntity(objectiveOfVisa,beneficiaryList,profissionalList,
+                    responsibleEntityList,migratoryDataList,smeUser);
             objectiveOfVisa = null;
             beneficiaryList = null;
+            profissionalList = null;
+            responsibleEntityList = null;
+            migratoryDataList = null;
+            System.out.println("Inserção feita com sucesso");
+            menuEntity();
         }else{
             System.out.println("Usuario ou senha incorreta");
+            loginSME();
         }
     }
     public static void menuEntity() {
-        int option;
-        System.out.println("Insere uma opção");
+        clearScreen();
+        headFoot();
+        int option = 0;
+        int count = 0;
+        do{
+        System.out.println("    Insere uma opção");
         System.out.println("1 - 1ª VEZ");
         System.out.println("2 - PRORROGAÇÃO");
-            option = in.nextInt();
+        System.out.println(":: ");
+        option = in.nextInt();
 
             if (option == 1){
-                firstTime();
-                menuEntity();
-            }else{
+                if (insertion()) {
+                    System.out.println("INSERIDO COM SUCESSO");
+                    System.out.println("A seguir a fila ");
+                }else{
+                    System.out.println("Não inserido");
+                }
+            }else if(option == 2){
                 menuProrrogation();
-                menuEntity();
             }
-    }
-    public static void firstTime() {
-        Entity entity;
-        insertion();
-    }
-    public static void insertion() {
+        }while(++count != 3);
 
+    }
 
-        beneficiaryList.add(insertBeneficiary());
-        profissionalList.add(insertionProfession());
-        responsibleEntityList.add(insertionResponsible());
-        migratoryDataList.add(insertionMigratory());
-        smeList.add(insertionSME());
-        Integer option;
+    public static boolean insertion() {
+
+        Integer OPTION;
+        int option;
         showObjectiveOfVisa();
         option = in.nextInt();
-        System.out.println("ffff:  " + option);
-        objectiveOfVisa.add(option);
-
-        System.out.println("INSERIDO COM SUCESSO");
-        System.out.println("A seguir a fila ");
+        OPTION = option;
+        Beneficiary beneficiary = insertBeneficiary();
+        Professional professional = insertionProfession();
+        ResponsibleEntity responsible = insertionResponsible();
+        MigratoryData migratoryData = insertionMigratory();
+        if (beneficiary != null && professional != null && responsible != null && migratoryData != null){
+            objectiveOfVisa.add(OPTION);
+            beneficiaryList.add(beneficiary);
+            profissionalList.add(professional);
+            responsibleEntityList.add(responsible);
+            migratoryDataList.add(migratoryData);
+            return true;
+        }else{
+            return false;
+        }
     }
     public static void menuProrrogation(){
+        clearScreen();
+        headFoot();
         int indexOf;
-        int bi;
+        String bi;
         String nationality;
-        System.out.println("PRORROGAÇÃO");
-
+        System.out.println("    PRORROGAÇÃO");
+        bi =  in.nextLine();
         System.out.println("Numero do BI: ");
-            bi = in.nextInt();
-        in.nextLine();
+            bi =  in.nextLine();
         System.out.println("Nacionalidade: ");
             nationality = in.nextLine();
 
         indexOf = selection(bi,nationality);
-
         if (indexOf != -1){
             int option;
             //entityList.get(indexOf);
+            do{
             showWhatToDo();
             option = in.nextInt();
 
-            switch (option) {
-                case 1-> menuUpdate(indexOf);
-                case 2-> search(indexOf);
-                case 3-> showAll(indexOf);
-                default -> {
-
+                switch (option) {
+                    case 1-> menuUpdate(indexOf);
+                    case 2-> search(indexOf);
+                    case 3-> showAll(indexOf);
+                    default -> {
+                    }
                 }
-            }
+            }while(option != 0 );
+        }else{
+            System.out.println("Senha ou numero de identidficação incorreta");
         }
     }
 
     public static int deleteEntity() {
-        int biNumber;
+        String biNumber;
         String nationality;
-        System.out.println("DELETAR UMA ENTIDADE");
+        System.out.println("    DELETAR UMA ENTIDADE");
         System.out.println("Numero do bilhete: ");
-            biNumber = in.nextInt();
+            biNumber =  in.nextLine();
         System.out.println("Nacionalidade: ");
             nationality = in.nextLine();
 
@@ -176,7 +248,7 @@ public class Main {
            return -1;
 
     }
-    public static int selection(int documentationNumber,String nationality) {
+    public static int selection(String documentationNumber,String nationality) {
         int indexOf = 0;
         for (Entity entity: entityList) {
             indexOf = entity.search(entityList,documentationNumber,nationality);
@@ -187,23 +259,22 @@ public class Main {
         return -1;
     }
 
-
-
-
-
-
     //   *************** SHOWS MENUS
 
 
     public static void showAll(int indexOf) {
-        System.out.println("MOSTRANDO TODOS OS CAMPOS");
-
+        clearScreen();
+        headFoot();
+        System.out.println("    MOSTRANDO TODOS OS CAMPOS");
             entityList.get(indexOf).showEntity();
     }
 
     public static void showWhatToDo() {
-        System.out.println("SELECIONA O QUE DESEJA FAZER");
+        clearScreen();
+        headFoot();
+        System.out.println("    SELECIONA O QUE DESEJA FAZER");
         System.out.println("""
+                0 - SAIR
                 1 - ACTUALIZAR
                 2 - PESQUISAR
                 3 - VISUALIZAR
@@ -211,6 +282,8 @@ public class Main {
     }
 
     public static void showTypeOfOperation(){
+        clearScreen();
+        headFoot();
         System.out.println("""
                 FORMULARIO DIGITAL DE VISTO\n
                 1 - 1ª VEZ \n
@@ -219,6 +292,8 @@ public class Main {
     }
 
     public static void showEntity() {
+        clearScreen();
+        headFoot();
         System.out.println("""
                     DIGITE O QUE DESEJA VER
                 1 - TIPO DE VISTO
@@ -230,6 +305,8 @@ public class Main {
                 :: """);
     }
     public static void showObjectiveOfVisa(){
+        clearScreen();
+        headFoot();
         System.out.println("""
                 DEFININDO O TIPO DO VISTO
                 Digite uma opção
@@ -241,10 +318,11 @@ public class Main {
                 6 -  VISTO DE TURISMO
                 7 - INVESTIDOR
                 8 - TRATAMENTO MÉDICO                        
-            
                 ::""");
     }
     public static void showBeneficiaryData(){
+        clearScreen();
+        headFoot();
         System.out.println("""
                  DADOS DE IDENTIFICAÇÃO DO BENEFICIÁRIO
                  Digite uma opção
@@ -277,6 +355,8 @@ public class Main {
                  :: """);
     }
     public static void showProfessionalData() {
+        clearScreen();
+        headFoot();
         System.out.println("""
                     DADOS PROFISSIONAIS
                     Digite uma opção
@@ -290,23 +370,26 @@ public class Main {
                :: """);
     }
     public static void showResponsible() {
+        clearScreen();
+        headFoot();
         System.out.println("""
-                    ENTIDADE RESPONSÁVEL E LOCAL DE RESIDÊNCIA/HOSPEDAGEM         \n 
-                    Digite uma opção\n
-                1 - Nome (Singular ou Empresa) \n
-                2 - Nº de Identificação (BI/Passaporte/Cartão/Outro)\n
-                3 - Validade\n
-                4 - Casa nº\n
-                5 - Rua\n
-                6 - Bairro/Aldeia\n
-                7 - Comuna\n
-                8 - Município\n
-                9 - Província\n
-                10 - País\n
-            
+                    ENTIDADE RESPONSÁVEL E LOCAL DE RESIDÊNCIA/HOSPEDAGEM     
+                    Digite uma opção
+                1 - Nome (Singular ou Empresa) 
+                2 - Nº de Identificação (BI/Passaporte/Cartão/Outro)
+                3 - Validade
+                4 - Casa nº
+                5 - Rua
+                6 - Bairro/Aldeia
+                7 - Comuna
+                8 - Município
+                9 - Província
+                10 - País            
                :: """);
     }
     public static void   showMigratory() {
+        clearScreen();
+        headFoot();
         System.out.println("""
                     DADOS MIGRATÓRIOS        
                     Digite uma opção 
@@ -319,6 +402,8 @@ public class Main {
                """);
     }
     public static void showSME() {
+        clearScreen();
+        headFoot();
         System.out.println("""
                     PREENCHIMENTO RESERVADO AO SME
                     Digite uma opção\n
@@ -330,13 +415,7 @@ public class Main {
             
                :: """);
     }
-    public static void showAssignment() {
-        System.out.println("""
-                    ASSINATURA DO REQUERENTE
-                    
-            
-               :: """);
-    }
+
 
     //   *************** INSERTION MENU
 
@@ -347,32 +426,6 @@ public class Main {
         newPerson.insertionPerson(p,newPerson);
         return true;
     }
-//    public static int showInsertion() {
-//        Scanner in = new Scanner(System.in);
-//        int option = 0;
-//        System.out.println("""
-//                    OPÇÕES PARA INSERIR INFORMAÇÕES\n
-//                    Digite uma\n
-//                 1 - Personal data\n
-//                 2 - Profession\n
-//                 3 - \n
-//                 4 - \n
-//                 5 - \n
-//                 6 - \n
-//
-//                ::""");
-//        option = in.nextInt();
-//        if(option >-1 && option < 7)  insertionOptions(option);
-//        else{
-//            System.out.println("Opção invalida." +
-//                    "           Insere" +
-//                    "0 - cancelar" +
-//                    "1 - repetir\n ");
-//            if(in.nextInt() == 0) return 0;
-//            showInsertion();
-//        }
-//        return 1;
-//    }
 
     public static Beneficiary insertBeneficiary(){
         Scanner in = new Scanner(System.in);
@@ -392,7 +445,7 @@ public class Main {
         String province;
         int Gender;
         String civilState;
-        int documentationNumber;
+        String documentationNumber;
         int passportNumber;
         String localOfEmissionPassport;
         String dataOfEmissionPassport; //*******************
@@ -408,7 +461,7 @@ public class Main {
         String provinceToBe;
 
 
-        System.out.println("INSERINDO DADOS DE IDENTIFICAÇÃO DO BENEFICIÁRIO");
+        System.out.println("        INSERINDO DADOS DE IDENTIFICAÇÃO DO BENEFICIÁRIO");
         System.out.println("Nome: ");name = in.nextLine();
         System.out.println("Apelido: "); Nickname = in.nextLine();
         System.out.println("Nacionalidade: "); Nationality = in.nextLine();
@@ -423,25 +476,23 @@ public class Main {
         System.out.println("Comuna: "); comuna = in.nextLine();
         System.out.println("Município: "); municipio = in.nextLine();
         System.out.println("Província: "); province = in.nextLine();
-        System.out.println("Genero: " +
-                "1 - Homem \n" +
-                "2 - Mulher\n"); Gender = in.nextInt();
-        in.nextInt();
-        System.out.println("Estado Civil: ");civilState = in.nextLine();
-        System.out.println("Documentos de identificação: "); documentationNumber = in.nextInt();
+        System.out.println("  Genero\n1 - Homem 2 - Mulher\n:: ");
+        Gender = in.nextInt();
+        in.nextLine();
+        System.out.println("Estado Civil: ");
+        civilState = in.nextLine();
+        System.out.println("Documento de identificação: "); documentationNumber = in.nextLine();
         System.out.println("Passaporte nº: "); passportNumber = in.nextInt();
-
-        in.nextInt();
+        in.nextLine();
         System.out.println("Local de emissão: "); localOfEmissionPassport = in.nextLine();
-
         System.out.println("Data de emissão: "); dataOfEmissionPassport = in.nextLine();
         System.out.println("Validade: ");validate = in.nextInt();
         System.out.println("Telefone: "); telephoneNumber = in.nextInt();
-        in.nextInt();
+        in.nextLine();
         System.out.println("E-mail: "); e_mail = in.nextLine();
         System.out.println("Local de hospedagem em Angola: Casa nº: ");
         houseNumberToBe = in.nextInt();
-        in.nextInt();
+        in.nextLine();
         System.out.println("Rua: "); StreetToBe = in.nextLine();
         System.out.println("Bairro"); bairroToBe = in.nextLine();
         System.out.println("Comuna: "); comunaToBe = in.nextLine();
@@ -465,22 +516,22 @@ public class Main {
         String profession;
         String company;
         String function;
-        Integer telephoneNumber;
+        int telephoneNumber;
         String email;
         String address;
 
-        System.out.println("DADOS PROFISSIONAIS");
-        System.out.println("Inserindo  ");
-
+        System.out.println("        DADOS PROFISSIONAIS");
+        System.out.println("    Inserindo  ");
+        in.nextLine();
         System.out.println("Profissão: ");
-        profession = in.nextLine();//*********
-        System.out.println("Empresa: ");//********
+        profession = in.nextLine();
+        System.out.println("Empresa: ");
         company = in.nextLine();
         System.out.println("Função: ");
         function = in.nextLine();
         System.out.println("Telefones: ");
         telephoneNumber = in.nextInt();
-        in.nextInt();
+        in.nextLine();
         System.out.println("E-mail: ");
         email = in.nextLine();
         System.out.println("Endereço: ");
@@ -504,29 +555,29 @@ public class Main {
         String provincia;
         String pais;
 
-        System.out.println("ENTIDADE RESPONSÁVEL E LOCAL DE RESIDÊNCIA/HOSPEDAGEM");
-        System.out.println("Inserindo ");
-
-        System.out.println("Nome (Singular ou Empresa)");
+        System.out.println("        ENTIDADE RESPONSÁVEL E LOCAL DE RESIDÊNCIA/HOSPEDAGEM");
+        System.out.println("    Inserindo ");
+        in.nextLine();
+        System.out.println("Nome (Singular ou Empresa): ");
         nome = in.nextLine();
-        System.out.println("Nº de Identificação (BI/Passaporte/Cartão/Outro)");
+        System.out.println("Nº de Identificação (BI/Passaporte/Cartão/Outro): ");
         numeroIdentificacao = in.nextLine();
-        System.out.println("Validade");
+        System.out.println("Validade: ");
         validade = in.nextLine();
-        System.out.println("Casa nº ");
+        System.out.println("Casa nº: ");
         casaNumero = in.nextInt();
-        in.nextInt();
-        System.out.println("Rua");
+        in.nextLine();
+        System.out.println("Rua: ");
         rua = in.nextLine();
-        System.out.println("Bairro/Aldeia ");
+        System.out.println("Bairro/Aldeia: ");
         bairroAldeia = in.nextLine();
-        System.out.println("Comuna");
+        System.out.println("Comuna: ");
         comuna = in.nextLine();
-        System.out.println("Município ");
+        System.out.println("Município: ");
         municipio = in.nextLine();
-        System.out.println("Província:");
+        System.out.println("Província: ");
         provincia = in.nextLine();
-        System.out.println("País:");
+        System.out.println("País: ");
         pais = in.nextLine();
 
         responsible = new ResponsibleEntity(nome,numeroIdentificacao,validade,
@@ -545,20 +596,21 @@ public class Main {
         int validadeVisto;
         String motivoSolicitacao;
 
-        System.out.println("DADOS MIGRATÓRIOS");
-        System.out.println("Inserindo");
-
+        System.out.println("        DADOS MIGRATÓRIOS");
+        System.out.println("    Inserindo");
+        in.nextLine();
         System.out.println("Data da última entrada (se aplicável): ");
         dataUltimaEntrada = in.nextLine();
-        System.out.println("Posto de fronteira utilizado ");
+        System.out.println("Posto de fronteira utilizado: ");
         postoFronteira = in.nextLine();
-        System.out.println("Tipo de visto");
+        System.out.println("Tipo de visto: ");
         tipoVisto = in.nextLine();
-        System.out.println("Nº do visto");
+        System.out.println("Nº do visto: ");
         numeroVisto = in.nextInt();
-        System.out.println("Validade do visto");
+        System.out.println("Validade do visto: ");
         validadeVisto = in.nextInt();
-        System.out.println("Vem nos termos da lei aplicável solicitar o acto referido por motivos de");
+        in.nextLine();
+        System.out.println("Vem nos termos da lei aplicável solicitar o acto referido por motivos de: ");
         motivoSolicitacao = in.nextLine();
 
         migratoryData = new MigratoryData(dataUltimaEntrada,postoFronteira,
@@ -569,16 +621,31 @@ public class Main {
     }
     public static SME insertionSME() {
         SME sme;
+        Random rand = new Random();
         int processNumber;
         String dateReception;
         String local;
         String assignature;
-
-        System.out.println("PREENCHIMENTO RESERVADO AO SME");
-        System.out.println("Inserindo");
-
-        System.out.println("Processo Nº: ");
-        processNumber = in.nextInt();
+//        int i=0,m=0;
+        System.out.println("        PREENCHIMENTO RESERVADO AO SME");
+        System.out.println("    Inserindo");
+        processNumber = rand.nextInt(1000);
+//        if (smeList != null){
+//
+//
+//            m = smeList.get(smeList.size()).getProcessNumber());
+//            i = m;
+//            System.out.println("value: "+ smeList.get(smeList.size()).getProcessNumber());
+//            while(i > 0) {
+//                if (smeList.get(i).getProcessNumber() == processNumber ){
+//                    processNumber = rand.nextInt(1000);
+//            }
+//            i--;
+//        }
+//        }
+        System.out.println("Processo Nº: " + processNumber);
+//        processNumber = in.nextInt();
+        in.nextLine();
         System.out.println("Data de recepção: ");
         dateReception = in.nextLine();
         System.out.println("Local de recepção");
@@ -648,7 +715,7 @@ public class Main {
         if (option > 0 && option < 27) {
             entityList.get(indexOf).getBeneficiary().showBeneficiary(option);
         }else {
-            System.out.println("ERRROR");
+            System.out.println("Não encontrado");
         }
     }
     public static void searchProfessional(int indexOf) {
@@ -658,8 +725,7 @@ public class Main {
         if (option > 0 && option < 7) {
             entityList.get(indexOf).getProfessional().showProfessional(option);
         }else {
-            System.out.println("ERRROR");
-        }
+            System.out.println("Não encontrado");        }
     }
 
     public static void searchResponsible(int indexOf) {
@@ -669,8 +735,7 @@ public class Main {
         if (option > 0 && option < 11) {
             entityList.get(indexOf).getResponsibleEntity().showResponsible(option);
         }else {
-            System.out.println("ERRROR");
-        }
+            System.out.println("Não encontrado");        }
     }
     public static void searcMigratory(int indexOf) {
         int option;
@@ -679,15 +744,14 @@ public class Main {
         if (option > 0 && option < 27) {
             entityList.get(indexOf).getMigratoryData().showMigratory(option);
         }else {
-            System.out.println("ERRROR");
-        }
+            System.out.println("Não encontrado");        }
     }
 
 
     //   *************** UPDATE MENU
 
     public static void menuUpdate(int indexOfObject) {
-        int option;
+        int option,newValue;
         System.out.println("Escolha uma das opções ");
         System.out.println("""
                 1 - Tipo do Visto
@@ -698,175 +762,196 @@ public class Main {
                 """);
         option = in.nextInt();
         switch (option){
-            case 1-> updateVisa(indexOfObject);
-            case 2-> updateBeneficiary(indexOfObject);
-            case 3-> updateProfessional(indexOfObject);
-            case 4-> updateResponsible(indexOfObject);
-            case 5-> updateMigratory(indexOfObject);
+            case 1-> {
+                showObjectiveOfVisa();
+                option = in.nextInt();
+                if (option > 0 && option < 9){
+
+                    System.out.println("Insere o novo valor: ");
+                    newValue = in.nextInt();
+                    if(updateVisa(indexOfObject,option)) {
+                        System.out.println("Actualição feita");
+                    }else{
+                        System.out.println("Actualização não feita");
+                    }
+                }
+            }
+            case 2-> {
+
+                showBeneficiaryData();
+                option = in.nextInt();
+
+
+                if (option > 0 && option < 27) {
+                    if(updateBeneficiary(indexOfObject,option)) {
+                        System.out.println("Dados pessoais actualizado");
+                    }else {
+                        System.out.println("Dados pessoais não actualizado");
+                    }
+                }
+
+            }
+            case 3-> {
+                showProfessionalData();
+                option = in.nextInt();
+
+                if (option > 0 && option < 6) {
+                    if(updateProfessional(indexOfObject,option)) {
+                        System.out.println("Dados profissionais actualizado");
+                    }else {
+                        System.out.println("Dados profissionais não actualizado");
+                    }
+                }else {
+                    System.out.println("Opção invalida");
+                }
+            }
+            case 4-> {
+                showResponsible();
+                option = in.nextInt();
+                if (option > 0 && option < 11) {
+                    if(updateResponsible(indexOfObject,option)){
+                        System.out.println("Dados dos Responsavel actualizado");
+                    }else {
+                        System.out.println("Dados dos Responsavel não actualizado");
+                    }
+                }else {
+                    System.out.println("Opção invalida");
+                }
+
+            }
+            case 5-> {
+                showMigratory();
+                option = in.nextInt();
+                if (option > 0 && option < 7) {
+                       if(updateMigratory(indexOfObject,option)) {
+                           System.out.println("Dados de Migração actualizado");
+                       }else {
+                           System.out.println("Dados de Migração não actualizado");
+                       }
+               }else{
+                    System.out.println("Opção invalida");
+                }
+            }
             default -> {
                 System.out.println("Erro no Menu option......!");
             }
         }
     }
-    public static void updateVisa(int indexOfObject) {
-        int option;
-        int newValue;
-        showObjectiveOfVisa();
-        option = in.nextInt();
+    public static boolean updateVisa(int indexOfObject,int option) {
 
-        System.out.println("Insere o novo valor: ");
-        newValue = in.nextInt();
-
-        if (option >0 && option < 9){
             int toCheckResult;
-            Entity entity;
-            toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject),option,1,newValue);
+            toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject),option,1,option);
             if (toCheckResult != -1){
-                System.out.println("UPDATED VISA");
+                return true;
+            }else {
+                return false;
             }
-        }else {
-            System.out.println("ERROR UPDATE VISA");
-        }
     }
 
+    public static boolean updateBeneficiary(int indexOfObject,int option) {
 
-    public static void updateBeneficiary(int indexOfObject) {
-        int option = 0;
 
         int intNewValue = 0;
         String stringNewValue = null;
-        showBeneficiaryData();
-        option = in.nextInt();
 
-
-        if (option > 0 && option < 27) {
+        int toCheckResult;
 
             if (option == 12 || option == 14 || option == 15
                     || option == 18 || option == 19 || option == 21) {
                 System.out.println("Insere o novo valor: ");
                 intNewValue = in.nextInt();
             } else {
+                in.nextLine();
                 System.out.println("Insere o novo valor: ");
                 stringNewValue = in.nextLine();
             }
 
             if (intNewValue != 0) {
-                int toCheckResult;
-                Entity entity;
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 2, intNewValue);
 
             } else {
-                int toCheckResult;
-                Entity entity;
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 2, stringNewValue);
 
             }
-        } else {
-            System.out.println("Dados pessoais não actualizado");
-        }
+            return toCheckResult != -1;
 
     }
-    public static void  updateProfessional(int indexOfObject) {
-        int option = 0;
+    public static boolean  updateProfessional(int indexOfObject,int option) {
+
 
         int intNewValue = 0;
         String stringNewValue = null;
-        showProfessionalData();
-        option = in.nextInt();
-
-
-        if (option > 0 && option < 6) {
+        int toCheckResult;
 
             if (option == 4) {
                 System.out.println("Insere o novo valor: ");
                 intNewValue = in.nextInt();
             } else {
+                in.nextLine();
                 System.out.println("Insere o novo valor: ");
                 stringNewValue = in.nextLine();
             }
 
             if (intNewValue != 0) {
-                int toCheckResult;
-                Entity entity;
+                System.out.println("ddddddd");
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 3, intNewValue);
 
-            } else {
-                int toCheckResult;
-                Entity entity;
+            }else {
+                System.out.println("eeeeeee");
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 3, stringNewValue);
 
             }
-        } else {
-            System.out.println("Dados profissionais não actualizado");
-        }
+        return toCheckResult != -1;
     }
-    public static void updateResponsible( int indexOfObject) {
-        int option = 0;
+    public static boolean updateResponsible( int indexOfObject,int option) {
+
 
         int intNewValue = 0;
         String stringNewValue = null;
-        showResponsible();
-        option = in.nextInt();
+        int toCheckResult;
 
 
-        if (option > 0 && option < 11) {
 
-            if (option == 2 || option == 3 || option == 4) {
+        if (option == 2 || option == 3 || option == 4) {
                 System.out.println("Insere o novo valor: ");
                 intNewValue = in.nextInt();
             } else {
+            in.nextLine();
                 System.out.println("Insere o novo valor: ");
                 stringNewValue = in.nextLine();
             }
 
-            if (intNewValue != 0) {
-                int toCheckResult;
-                Entity entity;
+        if (intNewValue != 0) {
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 4, intNewValue);
-
+                return toCheckResult != -1;
             } else {
-                int toCheckResult;
-                Entity entity;
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 4, stringNewValue);
+                return toCheckResult != -1;
             }
-
-        } else {
-            System.out.println("Dados dos Responsavel não actualizado");
-        }
     }
-    public static void updateMigratory(int indexOfObject) {
-        int option = 0;
+    public static boolean updateMigratory(int indexOfObject, int option) {
 
         int intNewValue = 0;
         String stringNewValue = null;
-        showMigratory();
-        option = in.nextInt();
-
-
-        if (option > 0 && option < 7) {
+        int toCheckResult;
 
             if (option == 4 || option == 5 || option == 3) {
                 System.out.println("Insere o novo valor: ");
                 intNewValue = in.nextInt();
             } else {
+                in.nextLine();
                 System.out.println("Insere o novo valor: ");
                 stringNewValue = in.nextLine();
             }
 
             if (intNewValue != 0) {
-                int toCheckResult;
-                Entity entity;
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 5, intNewValue);
-
             } else {
-                int toCheckResult;
-                Entity entity;
                 toCheckResult = entityList.get(indexOfObject).update(entityList.get(indexOfObject), option, 5, stringNewValue);
             }
+        return toCheckResult != -1;
 
-        } else {
-            System.out.println("Dados de Migração não actualizado");
-        }
+
     }
 
 

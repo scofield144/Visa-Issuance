@@ -135,7 +135,6 @@ public class ResponsibleEntity {
             case 8 -> setProvincia((String)  newValue);
             case 9 -> setValidade((String)  newValue);
             case 10 -> setRua((String)  newValue);
-
             default -> {
             }
         }
