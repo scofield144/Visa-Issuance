@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Entity {
     private Integer visaPurpose;
-    private Beneficiary beneficiary;
-    private Professional professional;
-    private ResponsibleEntity responsibleEntity;
-    private MigratoryData migratoryData;
-    private SME sme;
+    private final Beneficiary beneficiary;
+    private final Professional professional;
+    private final ResponsibleEntity responsibleEntity;
+    private final MigratoryData migratoryData;
+    private final SME sme;
     private static Entity entityList;
 
     //public static Entity create(){    }

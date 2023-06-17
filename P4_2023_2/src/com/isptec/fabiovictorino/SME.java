@@ -27,18 +27,6 @@ public class SME {
         return local;
     }
 
-//    public static SME smeList(int index){
-//
-//        SME newSME;
-//        newSME = = new SME(1122,);
-//
-//        Map<Integer,SME> smeMap = new HashMap<>();
-//
-//    }
-//    private static SME listOfSMEs(){
-//        List<>
-//    }
-
     public String getAssignature() {
         return assignature;
     }
